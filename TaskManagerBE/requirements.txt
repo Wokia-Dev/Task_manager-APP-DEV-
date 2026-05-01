@@ -1,0 +1,11 @@
+Flask==3.1.*
+Flask-SQLAlchemy==3.1.*
+Flask-JWT-Extended==4.7.*
+Flask-CORS==5.*
+Flask-Marshmallow==1.2.*
+marshmallow>=3.0,<4.0
+marshmallow-sqlalchemy==1.1.*
+PyMySQL==1.1.*
+cryptography
+python-dotenv
+Werkzeug>=3.0
