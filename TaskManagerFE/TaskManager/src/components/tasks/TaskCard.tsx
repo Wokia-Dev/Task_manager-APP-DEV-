@@ -16,9 +16,11 @@ import type { Task } from '@/types';
 interface TaskCardProps {
   task: Task;
   onPress: () => void;
+  /** When true, prominently show the assignee name + avatar (for Team Tasks view). */
+  showAssignee?: boolean;
 }
 
-export function TaskCard({ task, onPress }: TaskCardProps) {
+export function TaskCard({ task, onPress, showAssignee = true }: TaskCardProps) {
   const colors = useColors();
 
   const priorityColors: Record<string, { color: string; bg: string }> = {
@@ -121,12 +123,20 @@ export function TaskCard({ task, onPress }: TaskCardProps) {
               </View>
             )}
 
-            {task.assignee && (
-              <Avatar
-                initials={task.assignee.initials}
-                color={task.assignee.avatar_color}
-                size={26}
-              />
+            {showAssignee && task.assignee && (
+              <View style={styles.assigneeContainer}>
+                <Text style={[styles.assigneeName, { color: colors.textSecondary }]} numberOfLines={1}>
+                  {task.assignee.full_name?.split(' ')[0]}
+                </Text>
+                <Avatar
+                  initials={task.assignee.initials}
+                  color={task.assignee.avatar_color}
+                  size={26}
+                />
+              </View>
+            )}
+            {showAssignee && !task.assignee && (
+              <Text style={[styles.unassigned, { color: colors.textTertiary }]}>Unassigned</Text>
             )}
           </View>
         </View>
@@ -187,5 +197,19 @@ const styles = StyleSheet.create({
   dueDate: {
     fontSize: FontSizes.xs,
     fontWeight: FontWeights.medium,
+  },
+  assigneeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  assigneeName: {
+    fontSize: FontSizes.xs,
+    fontWeight: FontWeights.medium,
+  },
+  unassigned: {
+    fontSize: FontSizes.xs,
+    fontWeight: FontWeights.medium,
+    fontStyle: 'italic',
   },
 });

@@ -41,9 +41,9 @@ export function Card({
       borderWidth: variant === 'outlined' ? 1 : 0,
       borderColor: variant === 'outlined' ? colors.border : undefined,
     },
-    variant !== 'outlined' && Shadows.sm,
-    !noPadding && styles.padding,
-    style,
+    ...(variant !== 'outlined' ? [Shadows.sm as ViewStyle] : []),
+    ...(!noPadding ? [styles.padding] : []),
+    ...(style ? [style] : []),
   ];
 
   if (onPress) {

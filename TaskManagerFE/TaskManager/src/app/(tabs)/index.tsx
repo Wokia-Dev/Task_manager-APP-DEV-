@@ -134,7 +134,7 @@ export default function DashboardScreen() {
 
             {/* Overdue alert */}
             {stats.overdue > 0 && (
-              <Card style={[styles.overdueCard, { backgroundColor: colors.dangerLight }]}>
+              <Card style={{ ...styles.overdueCard, backgroundColor: colors.dangerLight }}>
                 <MaterialIcons name="warning" size={20} color={colors.danger} />
                 <Text style={[styles.overdueText, { color: colors.danger }]}>
                   {stats.overdue} task{stats.overdue > 1 ? 's' : ''} overdue

@@ -1,5 +1,4 @@
 import json
-import pytest
 
 def test_register(client):
     response = client.post('/api/auth/register', json={
